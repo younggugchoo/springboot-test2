@@ -18,8 +18,10 @@ plugins {
     id 'java'
 }
 
-group 'org.example'
+group 'com.example'
 version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
 
 apply plugin :'java'
 apply plugin :'eclipse'
@@ -31,13 +33,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly('org.springframework.boot:spring-boot-starter-web')
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
-    testCompileOnly('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-test {
+/*
+tasks.named('test') {
     useJUnitPlatform()
-}
+}*/
