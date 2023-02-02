@@ -1,4 +1,4 @@
-package com.example.test2.springboot;
+package com.example.test2.springboot.web;
 
 import com.example.test2.springboot.web.HelloController;
 import org.junit.Test;
@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.is;
 
 
 @RunWith(SpringRunner.class)
@@ -28,6 +30,22 @@ public class HelloControllerTest {
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(hello));
+
+    }
+
+    @Test
+    public void return_helloDto()throws  Exception{
+        String name = "hello";
+        int amount = 1000;
+
+        mockMvc.perform(
+                get("/hello/dto/")
+                        .param("name", name)
+                        .param("amount", String.valueOf(amount)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is(name)))
+                .andExpect(jsonPath("$.amount", is(amount)));
+
 
     }
 }
