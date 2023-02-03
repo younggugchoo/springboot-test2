@@ -1,15 +1,19 @@
 package com.example.test2.springboot.domain.posts;
 
+import com.example.test2.springboot.domain.BaseTimeEntity;
+import com.zaxxer.hikari.util.UtilityElf;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts {
+@DynamicUpdate // 변경한 필드만 대응
+public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +29,11 @@ public class Posts {
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
     }
 
 
