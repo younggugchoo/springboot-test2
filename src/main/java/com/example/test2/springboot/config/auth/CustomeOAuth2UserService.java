@@ -1,6 +1,5 @@
 package com.example.test2.springboot.config.auth;
 
-import antlr.ParseTreeToken;
 import com.example.test2.springboot.config.auth.dto.OAuthAttributes;
 import com.example.test2.springboot.config.auth.dto.SessionUser;
 import com.example.test2.springboot.domain.user.User;

@@ -1,5 +1,7 @@
 package com.example.test2.springboot.web;
 
+import com.example.test2.springboot.config.auth.LoginUser;
+import com.example.test2.springboot.config.auth.dto.SessionUser;
 import com.example.test2.springboot.service.posts.PostsService;
 import com.example.test2.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +18,14 @@ public class IndexController {
 
     private final PostsService postsService;
     @GetMapping("/")
-    public String index(Model model){
+    /*
+    * 어떤 컨트롤러에서 @LoginUser를 참조하면 세션을 가져올수 있음.
+    * */
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllDesc());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 
